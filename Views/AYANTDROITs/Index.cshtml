@@ -1,0 +1,93 @@
+﻿@model IEnumerable<HeritagesProjectG6.Models.AYANTDROIT>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DESIGNATION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IMAGEADR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DESCRIPTION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DATECREATION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TYPEHERITIER)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NOM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRENOM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DATENAISSANCE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SEXE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UTILISATEUR.DESIGNATION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HERITIER.DESCRIPTION)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DESIGNATION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IMAGEADR)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DESCRIPTION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DATECREATION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TYPEHERITIER)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRENOM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DATENAISSANCE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SEXE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UTILISATEUR.DESIGNATION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HERITIER.DESCRIPTION)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ADRID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ADRID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ADRID })
+        </td>
+    </tr>
+}
+
+</table>

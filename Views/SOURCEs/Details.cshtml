@@ -1,0 +1,42 @@
+﻿@model HeritagesProjectG6.Models.SOURCE
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SOURCE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DESIGNATION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESIGNATION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HIERARCHIEID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HIERARCHIEID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.COMMENTAIRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COMMENTAIRE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SOURCEID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

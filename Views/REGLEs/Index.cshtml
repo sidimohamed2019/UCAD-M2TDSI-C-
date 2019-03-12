@@ -1,0 +1,51 @@
+﻿@model IEnumerable<HeritagesProjectG6.Models.REGLE>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DESCRIPTION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ECOLES)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.COMMENTAIRE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SOURCE.DESIGNATION)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DESCRIPTION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ECOLES)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.COMMENTAIRE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SOURCE.DESIGNATION)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.REGLEID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.REGLEID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.REGLEID })
+        </td>
+    </tr>
+}
+
+</table>

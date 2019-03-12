@@ -1,0 +1,50 @@
+﻿@model HeritagesProjectG6.Models.BIENS
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BIENS</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DESCRIPTION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESCRIPTION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EVALUATEUR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EVALUATEUR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AFFECTATION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AFFECTATION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HERITAGE.DESCRIPTION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HERITAGE.DESCRIPTION)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BIENID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

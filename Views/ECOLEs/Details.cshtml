@@ -1,0 +1,50 @@
+﻿@model HeritagesProjectG6.Models.ECOLE
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ECOLE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NOM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DESCRIPTION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESCRIPTION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.REGLE.DESCRIPTION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.REGLE.DESCRIPTION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HERITAGE.DESCRIPTION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HERITAGE.DESCRIPTION)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ECOLEID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

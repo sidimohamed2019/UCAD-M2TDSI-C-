@@ -1,0 +1,51 @@
+﻿@model IEnumerable<HeritagesProjectG6.Models.BIENS>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DESCRIPTION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EVALUATEUR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AFFECTATION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HERITAGE.DESCRIPTION)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DESCRIPTION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EVALUATEUR)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AFFECTATION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HERITAGE.DESCRIPTION)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BIENID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BIENID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BIENID })
+        </td>
+    </tr>
+}
+
+</table>

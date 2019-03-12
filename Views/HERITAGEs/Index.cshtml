@@ -1,0 +1,63 @@
+﻿@model IEnumerable<HeritagesProjectG6.Models.HERITAGE>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DESCRIPTION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DATE_DECES)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DATE_HERITAGE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ECOLEID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MONTANT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HERITIER.DESCRIPTION)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DESCRIPTION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DATE_DECES)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DATE_HERITAGE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ECOLEID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MONTANT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HERITIER.DESCRIPTION)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.HERITAGEID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.HERITAGEID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.HERITAGEID })
+        </td>
+    </tr>
+}
+
+</table>

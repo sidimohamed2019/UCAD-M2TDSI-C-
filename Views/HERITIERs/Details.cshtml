@@ -1,0 +1,42 @@
+﻿@model HeritagesProjectG6.Models.HERITIER
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HERITIER</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DESCRIPTION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESCRIPTION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CODE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CODE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ILLLUSTRATION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ILLLUSTRATION)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.NOMENCLATUREID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
