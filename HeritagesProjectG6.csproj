@@ -140,6 +140,7 @@
     <Compile Include="Controllers\HERITAGEsController.cs" />
     <Compile Include="Controllers\HERITIERsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\REGLEsController.cs" />
     <Compile Include="Controllers\SOURCEsController.cs" />
     <Compile Include="Controllers\UTILISATEURsController.cs" />
@@ -192,6 +193,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\login.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -280,6 +282,7 @@
     <Content Include="Views\SOURCEs\Details.cshtml" />
     <Content Include="Views\SOURCEs\Edit.cshtml" />
     <Content Include="Views\SOURCEs\Index.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
