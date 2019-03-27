@@ -1,0 +1,49 @@
+﻿@model HeritageProjectGrp6.Models.UTILISATEUR
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>UTILISATEUR</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="UTILISATEURID" />
+            <div class="form-group">
+                <label asp-for="UTI_UTILISATEURID" class="control-label"></label>
+                <input asp-for="UTI_UTILISATEURID" class="form-control" />
+                <span asp-validation-for="UTI_UTILISATEURID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DESIGNATION" class="control-label"></label>
+                <input asp-for="DESIGNATION" class="form-control" />
+                <span asp-validation-for="DESIGNATION" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EMAIL" class="control-label"></label>
+                <input asp-for="EMAIL" class="form-control" />
+                <span asp-validation-for="EMAIL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TYPEUTILISATEUR" class="control-label"></label>
+                <input asp-for="TYPEUTILISATEUR" class="form-control" />
+                <span asp-validation-for="TYPEUTILISATEUR" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

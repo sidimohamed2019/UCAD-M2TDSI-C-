@@ -1,0 +1,95 @@
+﻿@model IEnumerable<HeritageProjectGrp6.Models.AYANTDROIT>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DESIGNATION)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IMAGEADR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DESCRIPTION)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DATECREATION)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TYPEHERITIER)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NOM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PRENOM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DATENAISSANCE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SEXE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UTILISATEUR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HERITIER)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DESIGNATION)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IMAGEADR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DESCRIPTION)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DATECREATION)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TYPEHERITIER)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NOM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PRENOM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DATENAISSANCE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SEXE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UTILISATEUR.UTILISATEURID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HERITIER.NOMENCLATUREID)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ADRID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ADRID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ADRID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

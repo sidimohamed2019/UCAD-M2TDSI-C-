@@ -1,0 +1,53 @@
+﻿@model IEnumerable<HeritageProjectGrp6.Models.ECOLE>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NOM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DESCRIPTION)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.REGLE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HERITAGE)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NOM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DESCRIPTION)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.REGLE.REGLEID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HERITAGE.HERITAGEID)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ECOLEID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ECOLEID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ECOLEID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

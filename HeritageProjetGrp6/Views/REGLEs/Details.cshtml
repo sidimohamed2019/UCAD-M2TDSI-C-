@@ -1,0 +1,42 @@
+﻿@model HeritageProjectGrp6.Models.REGLE
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>REGLE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DESCRIPTION)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DESCRIPTION)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ECOLES)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ECOLES)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.COMMENTAIRE)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.COMMENTAIRE)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SOURCE)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SOURCE.SOURCEID)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.REGLEID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

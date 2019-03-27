@@ -1,0 +1,36 @@
+﻿@model HeritageProjectGrp6.Models.HERITIER
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HERITIER</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DESCRIPTION)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DESCRIPTION)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CODE)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CODE)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ILLLUSTRATION)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ILLLUSTRATION)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.NOMENCLATUREID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

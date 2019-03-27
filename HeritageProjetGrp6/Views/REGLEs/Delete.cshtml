@@ -1,0 +1,45 @@
+﻿@model HeritageProjectGrp6.Models.REGLE
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>REGLE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DESCRIPTION)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DESCRIPTION)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ECOLES)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ECOLES)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.COMMENTAIRE)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.COMMENTAIRE)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SOURCE)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SOURCE.SOURCEID)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="REGLEID" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
