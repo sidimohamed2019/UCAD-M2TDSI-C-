@@ -29,6 +29,7 @@ namespace HeritageProjectGrp6.Models
         public Nullable<int> UTI_UTILISATEURID { get; set; }
         public string DESIGNATION { get; set; }
         public string EMAIL { get; set; }
+        public string PWD { get; set; }
         public string TYPEUTILISATEUR { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
