@@ -15,19 +15,11 @@ namespace HeritageProjetGrp6.Controllers
             return View();
         }
 
-        // GET: Login/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Login/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        // GET: Login/Login
         public ActionResult Login()
         {
+
+
             return View();
         }
 

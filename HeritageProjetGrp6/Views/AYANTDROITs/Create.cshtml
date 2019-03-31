@@ -3,79 +3,72 @@
 @{
     ViewData["Title"] = "Create";
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/css/login.css" rel="stylesheet" type="text/css" />
+    <script src="~/js/site.js"></script>
+</head>
+<body style="background-color:cadetblue;">   
+  <div class="row">
+        <div class="wrapper fadeInDown">
+            <div id="formContent">
+                <h3>Créer Un Ayant Droit</h3>
+                <div class="row">
+                    
+                        <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            
+                            
+                            <!--
+                            <div class="form-group">
+                                <input asp-for="IMAGEADR" class="form-control" placeholder="IMAGE" />
+                                <span asp-validation-for="IMAGEADR" class="text-danger"></span>
+                            </div>
+                                -->
+                            <div class="form-group">
+                                <input asp-for="DESCRIPTION" class="form-control" placeholder="DESCRIPTION"  />
+                                <span asp-validation-for="DESCRIPTION" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="DATECREATION" class="control-label">DATE CREATION</label>
+                                <input asp-for="DATECREATION" class="form-control" style="width: 410px;margin-left: 35px;"  />
+                                <span asp-validation-for="DATECREATION" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="TYPEHERITIER" class="form-control" placeholder="TYPE HERITIER"  />
+                                <span asp-validation-for="TYPEHERITIER" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="NOM" class="form-control" placeholder="NOM"  />
+                                <span asp-validation-for="NOM" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="PRENOM" class="form-control" placeholder="PRENOM" />
+                                <span asp-validation-for="PRENOM" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">DATE NAISSANCE</label>
+                                <input asp-for="DATENAISSANCE" class="form-control" style="width: 410px;margin-left: 35px;" />
+                                <span asp-validation-for="DATENAISSANCE" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="SEXE" class="form-control" placeholder="SEXE" />
+                                <span asp-validation-for="SEXE" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Valider" class="btn btn-default" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
-<h2>Create</h2>
+                <div>
+                    <a asp-action="Index">Back to List</a>
+                </div>
 
-<h4>AYANTDROIT</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="NOMENCLATUREID" class="control-label"></label>
-                <select asp-for="NOMENCLATUREID" class ="form-control" asp-items="ViewBag.NOMENCLATUREID"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="UTILISATEURID" class="control-label"></label>
-                <select asp-for="UTILISATEURID" class ="form-control" asp-items="ViewBag.UTILISATEURID"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="DESIGNATION" class="control-label"></label>
-                <input asp-for="DESIGNATION" class="form-control" />
-                <span asp-validation-for="DESIGNATION" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IMAGEADR" class="control-label"></label>
-                <input asp-for="IMAGEADR" class="form-control" />
-                <span asp-validation-for="IMAGEADR" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DESCRIPTION" class="control-label"></label>
-                <input asp-for="DESCRIPTION" class="form-control" />
-                <span asp-validation-for="DESCRIPTION" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DATECREATION" class="control-label"></label>
-                <input asp-for="DATECREATION" class="form-control" />
-                <span asp-validation-for="DATECREATION" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TYPEHERITIER" class="control-label"></label>
-                <input asp-for="TYPEHERITIER" class="form-control" />
-                <span asp-validation-for="TYPEHERITIER" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NOM" class="control-label"></label>
-                <input asp-for="NOM" class="form-control" />
-                <span asp-validation-for="NOM" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PRENOM" class="control-label"></label>
-                <input asp-for="PRENOM" class="form-control" />
-                <span asp-validation-for="PRENOM" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DATENAISSANCE" class="control-label"></label>
-                <input asp-for="DATENAISSANCE" class="form-control" />
-                <span asp-validation-for="DATENAISSANCE" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SEXE" class="control-label"></label>
-                <input asp-for="SEXE" class="form-control" />
-                <span asp-validation-for="SEXE" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+                @section Scripts {
+                    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+                }
+</body>
+</html>

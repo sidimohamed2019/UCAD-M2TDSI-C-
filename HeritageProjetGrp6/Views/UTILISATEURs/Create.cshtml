@@ -7,7 +7,7 @@
     <link href="~/css/login.css" rel="stylesheet" type="text/css" />
     <script src="~/js/site.js"></script>
 </head>
-<body>
+<body style="background-color:cadetblue;">
     <div class="wrapper fadeInDown">
         <div id="formContent">
             <!-- Tabs Titles -->
@@ -16,7 +16,9 @@
                 <img style="width:150px;" src="~/images/create.png" id="icon" alt="User Icon" />
             </div>
             <!-- Login Form -->
+
             <form asp-action="Create">
+
 
                 <input asp-for="DESIGNATION" id="designation" class="fadeIn second" name="designation" placeholder="Designation">
                 <span asp-validation-for="DESIGNATION" class="text-danger"></span>
@@ -24,8 +26,8 @@
                 <input asp-for="EMAIL" id="typeUser" class="fadeIn second" name="typeUser" placeholder="email">
                 <span asp-validation-for="EMAIL" class="text-danger"></span>
 
-                <input asp-for="PWD" id="email" class="fadeIn second" name="email" placeholder="password">
-                <span asp-validation-for="PWD" type="password" class="text-danger"></span>
+                <input asp-for="PWD" id="email" type="password" class="fadeIn second" name="email" placeholder="password">
+                <span asp-validation-for="PWD" class="text-danger"></span>
 
                 <input asp-for="TYPEUTILISATEUR" id="password" class="fadeIn third" name="login" placeholder="Type Utilisateur">
                 <span asp-validation-for="TYPEUTILISATEUR" class="text-danger"></span>
@@ -36,10 +38,10 @@
 
         </div>
     </div>
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
 </body>
 </html>
-
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
