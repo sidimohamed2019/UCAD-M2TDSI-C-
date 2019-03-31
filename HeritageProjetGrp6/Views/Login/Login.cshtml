@@ -1,4 +1,5 @@
-﻿
+﻿@model HeritageProjectGrp6.Models.UTILISATEUR
+
 @{
     ViewData["Title"] = "Login";
 }
@@ -9,7 +10,7 @@
     <link href="~/css/login.css" rel="stylesheet" type="text/css" />
     <script src="~/js/site.js"></script>
 </head>
-<body>
+<body  style="background-color:cadetblue;">
     <div class="wrapper fadeInDown">
         <div id="formContent">
             <!-- Tabs Titles -->
@@ -17,17 +18,15 @@
             <div class="fadeIn first">
                 <img style="width:150px;" src="~/images/login.png" id="icon" alt="User Icon" />
             </div>
-            <!-- Login Form
-            
-                -->
-            <form>
-                <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-                <input type="password" id="password" class="fadeIn third" name="login" placeholder="password">
+            <!-- Login Form   -->
+            <form asp-action="Login">
+                <input asp-validation-for="EMAIL" type="text" id="login" class="fadeIn second" name="login" placeholder="login">
+                <input asp-validation-for="PWD" type="password" id="password" class="fadeIn third" name="login" placeholder="password">
                 <input type="submit" class="fadeIn fourth" value="Connecter">
             </form>
             <!-- Remind Passowrd -->
             <div id="formFooter">
-                <a class="underlineHover" href="~/CreateUser/CreateUser">Créervotrecompte!!</a>
+                <a asp-area="" class="underlineHover" asp-controller="UTILISATEURs" asp-action="Create">Créer votre Compte</a>
             </div>
         </div>
     </div>
