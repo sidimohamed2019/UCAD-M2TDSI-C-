@@ -1,48 +1,47 @@
 ﻿@model HeritageProjectGrp6.Models.UTILISATEUR
 
-@{
-    ViewData["Title"] = "Create";
-}
 
-<h2>Create</h2>
-
-<h4>UTILISATEUR</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="UTI_UTILISATEURID" class="control-label"></label>
-                <input asp-for="UTI_UTILISATEURID" class="form-control" />
-                <span asp-validation-for="UTI_UTILISATEURID" class="text-danger"></span>
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/css/login.css" rel="stylesheet" type="text/css" />
+    <script src="~/js/site.js"></script>
+</head>
+<body style="background-color:cadetblue;">
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+            <!-- Icon -->
+            <div class="fadeIn first">
+                <img style="width:150px;" src="~/images/create.png" id="icon" alt="User Icon" />
             </div>
-            <div class="form-group">
-                <label asp-for="DESIGNATION" class="control-label"></label>
-                <input asp-for="DESIGNATION" class="form-control" />
+            <!-- Login Form -->
+
+            <form asp-action="Create">
+
+
+                <input asp-for="DESIGNATION" id="designation" class="fadeIn second" name="designation" placeholder="Designation">
                 <span asp-validation-for="DESIGNATION" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EMAIL" class="control-label"></label>
-                <input asp-for="EMAIL" class="form-control" />
+
+                <input asp-for="EMAIL" id="typeUser" class="fadeIn second" name="typeUser" placeholder="email">
                 <span asp-validation-for="EMAIL" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TYPEUTILISATEUR" class="control-label"></label>
-                <input asp-for="TYPEUTILISATEUR" class="form-control" />
+
+                <input asp-for="PWD" id="email" type="password" class="fadeIn second" name="email" placeholder="password">
+                <span asp-validation-for="PWD" class="text-danger"></span>
+
+                <input asp-for="TYPEUTILISATEUR" id="password" class="fadeIn third" name="login" placeholder="Type Utilisateur">
                 <span asp-validation-for="TYPEUTILISATEUR" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </form>
+
+                <input type="submit" class="fadeIn fourth" value="Créer User">
+
+            </form>
+
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</body>
+</html>

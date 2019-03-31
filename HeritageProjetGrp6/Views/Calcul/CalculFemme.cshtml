@@ -1,0 +1,643 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <link rel="stylesheet" type="text/css" href="~/css/highslide.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/style.css" />
+    <script type="text/javascript" src="~/js/highslide-with-gallery.js"></script>
+    <script type="text/javascript" src="~/css/shadedborder.js"></script>
+    <script type="text/javascript">
+        var myBorder = RUZEE.ShadedBorder.create({ corner: 9, shadow: 20, border: 0 });
+    </script>
+
+    <script type="text/javascript">
+        hs.graphicsDir = 'http://www.kurandersleri.net/miras/css/highslide/graphics/';
+        hs.align = 'center';
+        hs.transitions = ['expand', 'crossfade'];
+        hs.wrapperClassName = 'rounded-white'; //'dark borderless floating-caption';
+        hs.fadeInOut = true;
+        //hs.numberPosition = 'caption';
+        hs.dimmingOpacity = 0.75;
+
+        // Add the controlbar
+        if (hs.addSlideshow) hs.addSlideshow({
+            //slideshowGroup: 'group1',
+            interval: 5000,
+            repeat: false,
+            useControls: true,
+            fixedControls: 'fit',
+            overlayOptions: {
+                opacity: .75,
+                position: 'bottom center',
+                hideOnMouseOut: true
+            }
+        });
+    </script>
+
+    <style type="text/css">
+        <!--
+        A {
+            text-decoration: none;
+            color: navy;
+        }
+        -->
+    </style>
+
+    <script language="javascript" type="text/javascript">
+        function EnsureNumeric() {
+            var key = window.event.keyCode;
+            if (key < 48 || key > 57)
+                window.event.returnValue = false;
+        }
+    </script>
+
+    <script type="text/javascript">
+
+        function PayHesapla() {
+            d = document;
+
+            //html nesnelerinden alınan değerler...
+            Mal = parseInt(d.getElementById('MalVarligi').value);
+            var ECs = parseInt(d.getElementById('ErkekCocuk').selectedIndex);
+            var KCs = parseInt(d.getElementById('KizCocuk').selectedIndex);
+            var EKs = parseInt(d.getElementById('ErkekKardes').selectedIndex);
+            var KKs = parseInt(d.getElementById('KizKardes').selectedIndex);
+            var BabaVar = parseInt(d.getElementById('Baba').selectedIndex);
+            var AnneVar = parseInt(d.getElementById('Anne').selectedIndex);
+            var KocaVar = parseInt(d.getElementById('Koca').selectedIndex);
+
+            //hesaplamalarda kullanılacak değişkenler...
+            var ECp = 0;
+            var KCp = 0;
+            var Ap = 0;
+            var Bp = 0;
+            var Kp = 0;
+            var EKp = 0;
+            var KKp = 0;
+            var Xp = 0;
+            var Mdan = 0;
+            var KisiBasiPay = 0;
+            var AraHesap = 0;
+
+            //koşullara göre hesaplama işlemleri...
+            //alert('if dışı ');
+            if (ECs > 0) {
+                //1.Koşul:
+
+                //alert('if içi');
+                //Erkek çocuğun payı:
+                ECp = ECs * (2 * (Mal / (2 * ECs + KCs)));
+                //Kız çocuğun payı:
+                KCp = (KCs > 0 ? KCs * (Mal / (2 * ECs + KCs)) : 0);
+                //alert('ECp: ' + ECp);
+            }
+            else if (ECs == 0 && KCs >= 2) {
+                //2.Koşul:
+
+                //alert('if içi 2 ');
+                KCp = 2 * (Mal / 3);
+                //alert('KCp: ' + KCp);
+                //ikinci evre...
+                Mdan = Mal - KCp;
+                //Mdan = Mal / 3;
+                Ap = (AnneVar == 1 ? (1 / 6) * Mdan : 0);
+                Bp = (BabaVar == 1 ? (1 / 6) * Mdan : 0);
+                Kp = (KocaVar == 1 ? (1 / 4) * Mdan : 0);
+            }
+            else if (ECs == 0 && KCs == 1) {
+                //3.Koşul:
+
+                //alert('if içi ');
+                KCp = Mal / 2;
+                //ikinci evre...
+                Mdan = Mal - KCp;
+                //Mdan = Mal / 2;
+                Ap = (AnneVar == 1 ? (1 / 6) * Mdan : 0);
+                Bp = (BabaVar == 1 ? (1 / 6) * Mdan : 0);
+                Kp = (KocaVar == 1 ? (1 / 4) * Mdan : 0);
+            }
+            else if (ECs == 0 && KCs == 0 && BabaVar == 1 && EKs == 0 && KKs == 0) {
+                //4.Koşul:
+                //(03/08/2012 tarihinde koşulda değişiklik yapıldı. EKs==0 && KKs==0 ilave edildi.)
+
+                Ap = (AnneVar == 1 ? (1 / 3) * Mal : 0);
+                Kp = (KocaVar == 1 ? (1 / 2) * Mal : 0);
+                Bp = Mal - (Ap + Kp);
+            }
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 1 && (EKs + KKs) >= 2) {
+                //5.Koşul:
+                //Eski koşul: (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 1 && EKs >= 1 && KKs >= 1 )
+                Ap = (1 / 6) * Mal;
+                Kp = (KocaVar == 1 ? (1 / 2) * Mal : 0);
+                AraHesap = (1 / 3) * Mal;
+                EKp = EKs * (2 * (AraHesap / (2 * EKs + KKs)));
+                KKp = KKs * (AraHesap / (2 * EKs + KKs));
+                //(06/09/2012) tarihinde yapılan değişiklikle Ap hesabına arta kalanlarda ilave ediliyor.
+                Ap += Mal - (Ap + Kp + EKp + KKp);
+            }
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 1 && EKs == 1 && KKs == 0) {
+                //6.Koşul:
+
+                Ap = (1 / 3) * Mal;
+                Kp = (KocaVar == 1 ? (1 / 2) * Mal : 0);
+                EKp = (1 / 6) * Mal;
+                //(06/09/2012) tarihinde yapılan değişiklikle Ap hesabına arta kalanlarda ilave ediliyor.
+                Ap += Mal - (Ap + Kp + EKp);
+            }
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 1 && EKs == 0 && KKs == 1) {
+                //7.Koşul:
+
+                Ap = (1 / 3) * Mal;
+                Kp = (KocaVar == 1 ? (1 / 2) * Mal : 0);
+                KKp = (1 / 6) * Mal;
+                //(06/09/2012) tarihinde yapılan değişiklikle Ap hesabına arta kalanlarda ilave ediliyor.
+                Ap += Mal - (Ap + Kp + KKp);
+            }
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 0 && EKs == 0 && KKs == 1) {
+                //8.Koşul:
+
+                Kp = (KocaVar == 1 ? (1 / 2) * Mal : 0);
+                KKp = (1 / 2) * Mal;
+            }
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 0 && EKs >= 1 && KKs == 0) {
+                //9.Koşul:
+
+                Kp = (KocaVar == 1 ? (1 / 2) * Mal : 0);
+                EKp = Mal - Kp;
+            }
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 0 && EKs == 0 && KKs >= 2) {
+                //10.Koşul:
+
+                //* Kp = (KocaVar == 1 ? (1 / 2) * Mal : 0);
+                //Mdan = Mal - Kp;  (06/09/2012 tarihinde aşağıdaki gibi değiştirildi.)
+                //* Mdan = Mal / 2;
+                //* KKp = (2 / 3) * Mdan;
+                //Yukarıdaki kodlarda (*) ile işaretli olanlar aşağıdaki hesaplamalarla değiştirildi.
+                //(21/11/2012) Tarihinde aşağıdaki kodlarla değiştirildi.
+                Kp = (KocaVar == 1 ? (1 / 2) * Mal : 0);
+                Mdan = Mal - Kp;
+                KKp = (2 / 3) * Mdan;
+            }
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 0 && EKs > 0 && KKs > 0) {
+                //11.Koşul:
+
+                Kp = (KocaVar == 1 ? (1 / 2) * Mal : 0);
+                Xp = Mal - Kp;
+                EKp = EKs * (2 * (Xp / (2 * EKs + KKs)));
+                KKp = KKs * (Xp / (2 * EKs + KKs));
+            }
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 1 && EKs == 0 && KKs == 0) {
+                //12.Koşul:
+
+                Ap = (1 / 3) * Mal;
+                Kp = (KocaVar == 1 ? (1 / 2) * Mal : 0);
+                //(06/09/2012) tarihinde yapılan değişiklikle Ap hesabına arta kalanlarda ilave ediliyor.
+                Ap += Mal - (Ap + Kp);
+            }
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 0 && EKs == 0 && KKs == 0) {
+                //13.Koşul:
+
+                Kp = (KocaVar == 1 ? (1 / 2) * Mal : 0);
+            }
+            else if (ECs == 0 && KCs == 0 && BabaVar == 1 && AnneVar == 1 && (EKs + KKs) >= 2) {
+                //14.Koşul:
+                //Yeni koşul: (03/08/2012 tarihinde ilave edildi.)
+                Ap = (1 / 6) * Mal;
+                Kp = (KocaVar == 1 ? (1 / 2) * Mal : 0);
+                AraHesap = (1 / 3) * Mal;
+                EKp = EKs * (2 * (AraHesap / (2 * EKs + KKs)));
+                KKp = KKs * (AraHesap / (2 * EKs + KKs));
+                Bp = Mal - (Ap + Kp + EKp + KKp);
+            }
+            else if (ECs == 0 && KCs == 0 && BabaVar == 1 && AnneVar == 1 && EKs == 1 && KKs == 0) {
+                //15.Koşul:
+                //Yeni koşul: (03/08/2012 tarihinde ilave edildi.)
+                Ap = (1 / 3) * Mal;
+                Kp = (KocaVar == 1 ? (1 / 2) * Mal : 0);
+                EKp = (1 / 6) * Mal;
+                Bp = Mal - (Ap + Kp + EKp);
+            }
+            else if (ECs == 0 && KCs == 0 && BabaVar == 1 && AnneVar == 1 && EKs == 0 && KKs == 1) {
+                //16.Koşul:
+                //Yeni koşul: (03/08/2012 tarihinde ilave edildi.)
+                Ap = (1 / 3) * Mal;
+                Kp = (KocaVar == 1 ? (1 / 2) * Mal : 0);
+                KKp = (1 / 6) * Mal;
+                Bp = Mal - (Ap + Kp + KKp);
+            }
+            else if (ECs == 0 && KCs == 0 && BabaVar == 1 && AnneVar == 0 && (EKs + KKs) >= 2) {
+                //17.Koşul:
+                //Yeni koşul: (03/08/2012 tarihinde ilave edildi.)
+                //Ap = (1 / 6) * Mal; //Hesaba gerek yok çünkü Anne zaten yok.
+                Kp = (KocaVar == 1 ? (1 / 2) * Mal : 0);
+                AraHesap = (1 / 3) * Mal;
+                EKp = EKs * (2 * (AraHesap / (2 * EKs + KKs)));
+                KKp = KKs * (AraHesap / (2 * EKs + KKs));
+                Bp = Mal - (Ap + Kp + EKp + KKp);
+            }
+            else if (ECs == 0 && KCs == 0 && BabaVar == 1 && AnneVar == 0 && EKs == 1 && KKs == 0) {
+                //18.Koşul:
+                //Yeni koşul: (03/08/2012 tarihinde ilave edildi.)
+                //Ap = (1 / 3) * Mal; //Hesaba gerek yok çünkü Anne zaten yok.
+                Kp = (KocaVar == 1 ? (1 / 2) * Mal : 0);
+                EKp = (1 / 6) * Mal;
+                Bp = Mal - (Ap + Kp + EKp);
+            }
+            else if (ECs == 0 && KCs == 0 && BabaVar == 1 && AnneVar == 0 && EKs == 0 && KKs == 1) {
+                //19.Koşul:
+                //Yeni koşul: (03/08/2012 tarihinde ilave edildi.)
+                //Ap = (1 / 3) * Mal; //Hesaba gerek yok çünkü Anne zaten yok.
+                Kp = (KocaVar == 1 ? (1 / 2) * Mal : 0);
+                KKp = (1 / 6) * Mal;
+                Bp = Mal - (Ap + Kp + KKp);
+            }
+
+            Xp = Mal - (ECp + KCp + Ap + Bp + Kp + EKp + KKp);
+
+            //hesaplama işlemleri sonu.
+
+            //alert('Xp: ' + Xp);
+
+            //Hesaplama sonuçları label nesnelerine dolduruluyor...
+            //Erkek çocuğun payı:
+            if (ECp > 0) {
+                d.getElementById('ECp').style.color = "red";
+                KisiBasiPay = ECp / ECs;
+            }
+            else { d.getElementById('ECp').style.color = "black"; }
+            if (ECp > 0) { d.getElementById('ECp').innerHTML = Math.round(KisiBasiPay * 100) / 100 + (ECs > 1 ? " x " + ECs + "<br\> (" + Math.round(ECp * 100) / 100 + ")" : ""); }
+            else { d.getElementById('ECp').innerHTML = 0; }
+
+            //Kız çocuğun payı:
+            if (KCp > 0) {
+                d.getElementById('KCp').style.color = "red";
+                KisiBasiPay = KCp / KCs;
+            }
+            else { d.getElementById('KCp').style.color = "black"; }
+            if (KCp > 0) { d.getElementById('KCp').innerHTML = Math.round(KisiBasiPay * 100) / 100 + (KCs > 1 ? " x " + KCs + "<br\> (" + Math.round(KCp * 100) / 100 + ")" : ""); }
+            else { d.getElementById('KCp').innerHTML = 0; }
+
+            //Annenin payı:
+            if (Ap > 0) { d.getElementById('Ap').style.color = "red"; }
+            else { d.getElementById('Ap').style.color = "black"; }
+            d.getElementById('Ap').innerHTML = Math.round(Ap * 100) / 100;
+
+            //Babanın payı:
+            if (Bp > 0) { d.getElementById('Bp').style.color = "red"; }
+            else { d.getElementById('Bp').style.color = "black"; }
+            d.getElementById('Bp').innerHTML = Math.round(Bp * 100) / 100;
+
+            //Erkek Kardeşlerin toplam payı:
+            if (EKp > 0) {
+                d.getElementById('EKp').style.color = "red";
+                KisiBasiPay = EKp / EKs;
+            }
+            else { d.getElementById('EKp').style.color = "black"; }
+            if (EKp > 0) { d.getElementById('EKp').innerHTML = Math.round(KisiBasiPay * 100) / 100 + (EKs > 1 ? " x " + EKs + "<br\> (" + Math.round(EKp * 100) / 100 + ")" : ""); }
+            else { d.getElementById('EKp').innerHTML = 0; }
+
+            //Kız Kardeşlerin toplam payı:
+            if (KKp > 0) {
+                d.getElementById('KKp').style.color = "red";
+                KisiBasiPay = KKp / KKs;
+            }
+            else { d.getElementById('KKp').style.color = "black"; }
+            if (KKp > 0) { d.getElementById('KKp').innerHTML = Math.round(KisiBasiPay * 100) / 100 + (KKs > 1 ? " x " + KKs + "<br\> (" + Math.round(KKp * 100) / 100 + ")" : ""); }
+            else { d.getElementById('KKp').innerHTML = 0; }
+
+            //Kocasının payı:
+            if (Kp > 0) { d.getElementById('Kp').style.color = "red"; }
+            else { d.getElementById('Kp').style.color = "black"; }
+            d.getElementById('Kp').innerHTML = Math.round(Kp * 100) / 100;
+
+            //Artan mal:
+            //Bazen küsuratlı hesaplamalarda 1.xx gibi artan olduğu için Xp>0 yerine Xp>2 kontrolü yapılıyor.
+            if (Xp > 2) { d.getElementById('Xp').style.color = "red"; }
+            else { d.getElementById('Xp').style.color = "black"; }
+            d.getElementById('Xp').innerHTML = Math.round(Xp * 100) / 100;
+
+            //Şablon imajının kontrol ve güncellenmesi...
+            var SablonImg = "http://www.kurandersleri.net/miras/Sablonlar_Kadin/en/";
+            if (ECs == 3 && KCs == 3) { SablonImg += "KSimg_p171_en.html"; }  //p177
+            else if (ECs == 3 && KCs == 2) { SablonImg += "KSimg_p383_en.html"; }  //p365
+            else if (ECs == 3 && KCs == 1) { SablonImg += "KSimg_p384_en.html"; }  //p366
+            else if (ECs == 3 && KCs == 0) { SablonImg += "KSimg_p385_en.html"; }  //p367
+            else if (ECs == 2 && KCs == 3) { SablonImg += "KSimg_p386_en.html"; }  //p368
+            else if (ECs == 1 && KCs == 3) { SablonImg += "KSimg_p387_en.html"; }  //p369
+            else if (ECs == 2 && KCs == 2) { SablonImg += "KSimg_p388_en.html"; }  //p370
+            else if (ECs == 2 && KCs == 1) { SablonImg += "KSimg_p389_en.html"; }  //p371
+            else if (ECs == 2 && KCs == 0) { SablonImg += "KSimg_p390_en.html"; }  //p372
+            else if (ECs == 1 && KCs == 2) { SablonImg += "KSimg_p391_en.html"; }  //p373
+            else if (ECs == 1 && KCs == 1) { SablonImg += "KSimg_p392_en.html"; }  //p374
+            else if (ECs == 1 && KCs == 0) { SablonImg += "KSimg_p393_en.html"; }  //p375
+            else if (ECs == 0 && KCs == 3 && BabaVar == 1 && AnneVar == 1 && KocaVar == 1) { SablonImg += "KSimg_p175_en.html"; }  //p181
+            else if (ECs == 0 && KCs == 3 && BabaVar == 1 && AnneVar == 1 && KocaVar == 0) { SablonImg += "KSimg_p398_en.html"; }  //p380
+            else if (ECs == 0 && KCs == 3 && BabaVar == 1 && AnneVar == 0 && KocaVar == 1) { SablonImg += "KSimg_p399_en.html"; }  //p381
+            else if (ECs == 0 && KCs == 3 && BabaVar == 0 && AnneVar == 1 && KocaVar == 1) { SablonImg += "KSimg_p400_en.html"; }  //p382
+            else if (ECs == 0 && KCs == 3 && BabaVar == 0 && AnneVar == 0 && KocaVar == 1) { SablonImg += "KSimg_p401_en.html"; }  //p383
+            else if (ECs == 0 && KCs == 3 && BabaVar == 1 && AnneVar == 0 && KocaVar == 0) { SablonImg += "KSimg_p402_en.html"; }  //p384
+            else if (ECs == 0 && KCs == 3 && BabaVar == 0 && AnneVar == 1 && KocaVar == 0) { SablonImg += "KSimg_p403_en.html"; }  //p385
+            else if (ECs == 0 && KCs == 3 && BabaVar == 0 && AnneVar == 0 && KocaVar == 0) { SablonImg += "KSimg_p404_en.html"; }  //p386
+            else if (ECs == 0 && KCs == 2 && BabaVar == 1 && AnneVar == 1 && KocaVar == 1) { SablonImg += "KSimg_p405_en.html"; }  //p387
+            else if (ECs == 0 && KCs == 1 && BabaVar == 1 && AnneVar == 1 && KocaVar == 1) { SablonImg += "KSimg_p406_en.html"; }  //p388
+            else if (ECs == 0 && KCs == 2 && BabaVar == 1 && AnneVar == 1 && KocaVar == 0) { SablonImg += "KSimg_p407_en.html"; }  //p389
+            else if (ECs == 0 && KCs == 1 && BabaVar == 1 && AnneVar == 1 && KocaVar == 0) { SablonImg += "KSimg_p408_en.html"; }  //p390
+            else if (ECs == 0 && KCs == 2 && BabaVar == 1 && AnneVar == 0 && KocaVar == 1) { SablonImg += "KSimg_p409_en.html"; }  //p391
+            else if (ECs == 0 && KCs == 1 && BabaVar == 1 && AnneVar == 0 && KocaVar == 1) { SablonImg += "KSimg_p410_en.html"; }  //p392
+            else if (ECs == 0 && KCs == 2 && BabaVar == 0 && AnneVar == 1 && KocaVar == 1) { SablonImg += "KSimg_p411_en.html"; }  //p393
+            else if (ECs == 0 && KCs == 1 && BabaVar == 0 && AnneVar == 1 && KocaVar == 1) { SablonImg += "KSimg_p412_en.html"; }  //p394
+            else if (ECs == 0 && KCs == 2 && BabaVar == 0 && AnneVar == 0 && KocaVar == 1) { SablonImg += "KSimg_p413_en.html"; }  //p395
+            else if (ECs == 0 && KCs == 1 && BabaVar == 0 && AnneVar == 0 && KocaVar == 1) { SablonImg += "KSimg_p414_en.html"; }  //p396
+            else if (ECs == 0 && KCs == 2 && BabaVar == 1 && AnneVar == 0 && KocaVar == 0) { SablonImg += "KSimg_p415_en.html"; }  //p397
+            else if (ECs == 0 && KCs == 1 && BabaVar == 1 && AnneVar == 0 && KocaVar == 0) { SablonImg += "KSimg_p416_en.html"; }  //p398
+            else if (ECs == 0 && KCs == 2 && BabaVar == 0 && AnneVar == 1 && KocaVar == 0) { SablonImg += "KSimg_p417_en.html"; }  //p399
+            else if (ECs == 0 && KCs == 1 && BabaVar == 0 && AnneVar == 1 && KocaVar == 0) { SablonImg += "KSimg_p418_en.html"; }  //p400
+            else if (ECs == 0 && KCs == 2 && BabaVar == 0 && AnneVar == 0 && KocaVar == 0) { SablonImg += "KSimg_p419_en.html"; }  //p401
+            else if (ECs == 0 && KCs == 1 && BabaVar == 0 && AnneVar == 0 && KocaVar == 0) { SablonImg += "KSimg_p420_en.html"; }  //p402
+            //İlave Şablonlar: (12/08/2012 tarihinde ilave edildi.)
+            else if (ECs == 0 && KCs == 0 && BabaVar == 1 && AnneVar == 1 && (EKs + KKs >= 2) && KocaVar == 1) { SablonImg += "KSimg_p179_en.html"; }  //ek01
+            else if (ECs == 0 && KCs == 0 && BabaVar == 1 && AnneVar == 0 && (EKs + KKs >= 2) && KocaVar == 1) { SablonImg += "KSimg_p424_en.html"; }  //ek02
+            else if (ECs == 0 && KCs == 0 && BabaVar == 1 && AnneVar == 1 && (EKs + KKs >= 2) && KocaVar == 0) { SablonImg += "KSimg_p425_en.html"; }  //ek03
+            else if (ECs == 0 && KCs == 0 && BabaVar == 1 && AnneVar == 0 && (EKs + KKs >= 2) && KocaVar == 0) { SablonImg += "KSimg_p426_en.html"; }  //ek04
+            else if (ECs == 0 && KCs == 0 && BabaVar == 1 && AnneVar == 1 && EKs == 1 && KKs == 0 && KocaVar == 1) { SablonImg += "KSimg_p427_en.html"; }  //ek05
+            else if (ECs == 0 && KCs == 0 && BabaVar == 1 && AnneVar == 0 && EKs == 1 && KKs == 0 && KocaVar == 1) { SablonImg += "KSimg_p428_en.html"; }  //ek06
+            else if (ECs == 0 && KCs == 0 && BabaVar == 1 && AnneVar == 1 && EKs == 0 && KKs == 1 && KocaVar == 1) { SablonImg += "KSimg_p429_en.html"; }  //ek07
+            else if (ECs == 0 && KCs == 0 && BabaVar == 1 && AnneVar == 0 && EKs == 0 && KKs == 1 && KocaVar == 1) { SablonImg += "KSimg_p430_en.html"; }  //ek08
+            else if (ECs == 0 && KCs == 0 && BabaVar == 1 && AnneVar == 1 && EKs == 1 && KKs == 0 && KocaVar == 0) { SablonImg += "KSimg_p431_en.html"; }  //ek09
+            else if (ECs == 0 && KCs == 0 && BabaVar == 1 && AnneVar == 0 && EKs == 1 && KKs == 0 && KocaVar == 0) { SablonImg += "KSimg_p432_en.html"; }  //ek10
+            else if (ECs == 0 && KCs == 0 && BabaVar == 1 && AnneVar == 1 && EKs == 0 && KKs == 1 && KocaVar == 0) { SablonImg += "KSimg_p433_en.html"; }  //ek11
+            else if (ECs == 0 && KCs == 0 && BabaVar == 1 && AnneVar == 0 && EKs == 0 && KKs == 1 && KocaVar == 0) { SablonImg += "KSimg_p434_en.html"; }  //ek12
+            //
+            else if (ECs == 0 && KCs == 0 && BabaVar == 1 && AnneVar == 1 && KocaVar == 1) { SablonImg += "KSimg_p443_en.html"; }  //p185
+            else if (ECs == 0 && KCs == 0 && BabaVar == 1 && AnneVar == 1 && KocaVar == 0) { SablonImg += "KSimg_p444_en.html"; }  //p405
+            else if (ECs == 0 && KCs == 0 && BabaVar == 1 && AnneVar == 0 && KocaVar == 1) { SablonImg += "KSimg_p445_en.html"; }  //p406
+            else if (ECs == 0 && KCs == 0 && BabaVar == 1 && AnneVar == 0 && KocaVar == 0) { SablonImg += "KSimg_p446_en.html"; }  //p407
+            //Template 4:
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 1 && (EKs + KKs >= 2) && KocaVar == 1) { SablonImg += "KSimg_p435_en.html"; }  //p189
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 1 && (EKs + KKs >= 2) && KocaVar == 0) { SablonImg += "KSimg_p436_en.html"; }  //p436
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 1 && EKs == 0 && KKs == 0 && KocaVar == 1) { SablonImg += "KSimg_p437_en.html"; }  //p437
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 1 && EKs == 0 && KKs == 0 && KocaVar == 0) { SablonImg += "KSimg_p438_en.html"; }  //p438
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 1 && EKs == 1 && KKs == 0 && KocaVar == 1) { SablonImg += "KSimg_p439_en.html"; }  //p414
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 1 && EKs == 0 && KKs == 1 && KocaVar == 1) { SablonImg += "KSimg_p440_en.html"; }  //p415
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 1 && EKs == 1 && KKs == 0 && KocaVar == 0) { SablonImg += "KSimg_p441_en.html"; }  //p441
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 1 && EKs == 0 && KKs == 1 && KocaVar == 0) { SablonImg += "KSimg_p442_en.html"; }  //p442
+            //Template 5:
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 0 && EKs > 0 && KKs > 0 && KocaVar == 1) { SablonImg += "KSimg_p183_en.html"; }  //p193
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 0 && EKs > 3 && KKs == 0 && KocaVar == 1) { SablonImg += "KSimg_p449_en.html"; }  //p421
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 0 && EKs > 0 && KKs > 0 && KocaVar == 0) { SablonImg += "KSimg_p450_en.html"; }  //p422
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 0 && EKs > 3 && KKs == 0 && KocaVar == 0) { SablonImg += "KSimg_p451_en.html"; }  //p423
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 0 && EKs == 3 && KKs == 0 && KocaVar == 1) { SablonImg += "KSimg_p452_en.html"; }  //p425
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 0 && EKs == 3 && KKs == 0 && KocaVar == 0) { SablonImg += "KSimg_p453_en.html"; }  //p426
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 0 && EKs == 2 && KKs == 0 && KocaVar == 1) { SablonImg += "KSimg_p454_en.html"; }  //p427
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 0 && EKs == 2 && KKs == 0 && KocaVar == 0) { SablonImg += "KSimg_p455_en.html"; }  //p428
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 0 && EKs == 1 && KKs == 0 && KocaVar == 1) { SablonImg += "KSimg_p456_en.html"; }  //p429
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 0 && EKs == 1 && KKs == 0 && KocaVar == 0) { SablonImg += "KSimg_p457_en.html"; }  //p430
+            //Template 6:
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 0 && EKs == 0 && KKs > 2 && KocaVar == 1) { SablonImg += "KSimg_p187_en.html"; }  //p197
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 0 && EKs == 0 && KKs == 2 && KocaVar == 1) { SablonImg += "KSimg_p461_en.png"; }  //p433
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 0 && EKs == 0 && KKs == 1 && KocaVar == 1) { SablonImg += "KSimg_p462_en.html"; }  //p434
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 0 && EKs == 0 && KKs > 2 && KocaVar == 0) { SablonImg += "KSimg_p463_en.png"; }  //p463
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 0 && EKs == 0 && KKs == 2 && KocaVar == 0) { SablonImg += "KSimg_p464_en.png"; }  //p464
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 0 && EKs == 0 && KKs == 1 && KocaVar == 0) { SablonImg += "KSimg_p465_en.html"; }  //p437
+            //Template 7:
+            else if (ECs == 0 && KCs == 0 && BabaVar == 0 && AnneVar == 0 && EKs == 0 && KKs == 0 && KocaVar == 1) { SablonImg += "KSimg_p469_en.html"; }  //p201
+            else { SablonImg = ""; }
+
+            if (SablonImg == "") {
+                d.getElementById("KSimg").style.height = "20";
+                d.getElementById("KSimg").style.visibility = "hidden";
+                d.getElementById("KSlink").href = "#";
+            }
+            else {
+                d.getElementById("KSimg").style.visibility = "visible";
+                d.getElementById("KSimg").src = SablonImg;
+                d.getElementById("KSimg").style.height = "450";
+                d.getElementById("KSlink").href = SablonImg;
+            }
+
+        }
+
+
+    </script>
+
+</head>
+
+<body id="body" style="background-color:cadetblue;">
+    <form id="FormKadin" action="http://www.kurandersleri.net/miras/en/Miras_Kadin_en.html">
+        <center>
+
+            <div id="container">
+                <div class="jumbotron">
+                    <h2 style="text-align: center;" class="display-4">Calcul des parts d'Héritage</h2>
+
+                    <p class="lead">
+                        <a style="margin-left:100px;" asp-controller="Calcul" asp-action="Calcul" class="btn btn-primary btn-lg">Homme décédé</a>
+                        <a asp-controller="Calcul" asp-action="CalculFemme" class="btn btn-primary btn-lg">Femme décédée</a>
+                        <a asp-controller="Calcul" asp-action="info" class="btn btn-primary btn-lg">Versets d'héritage</a>
+
+
+                    </p>
+                </div>
+
+                <div id="maincontent_container">
+                    <div id="maincontent">
+                        <center>
+                            <p></p>
+                            <table class="imagetable" width="350">
+                                <caption>Informations sur la femme décédée</caption>
+                                <tr>
+                                    <td align="right" width="200px">Propriété (en FCF):</td>
+                                    <td align="left" width="50px"><input type="text" id="MalVarligi" value="1000" dir="rtl" onkeypress="EnsureNumeric()" maxlength="10" /></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" width="200px">Fils:</td>
+                                    <td align="left" width="50px">
+                                        <select id="ErkekCocuk">
+                                            <option selected="selected">Non</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                            <option>13</option>
+                                            <option>14</option>
+                                            <option>15</option>
+                                            <option>16</option>
+                                            <option>17</option>
+                                            <option>18</option>
+                                            <option>19</option>
+                                            <option>20</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" width="200px">Filles:</td>
+                                    <td align="left" width="50px">
+                                        <select id="KizCocuk">
+                                            <option selected="selected">Non</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                            <option>13</option>
+                                            <option>14</option>
+                                            <option>15</option>
+                                            <option>16</option>
+                                            <option>17</option>
+                                            <option>18</option>
+                                            <option>19</option>
+                                            <option>20</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" width="200px">Père:</td>
+                                    <td align="left" width="50px">
+                                        <select id="Baba">
+                                            <option selected="selected">Non</option>
+                                            <option>Yes</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" width="200px">Mère:</td>
+                                    <td align="left" width="50px">
+                                        <select id="Anne">
+                                            <option selected="selected">Non</option>
+                                            <option>Yes</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" width="200px">Frères:</td>
+                                    <td align="left" width="50px">
+                                        <select id="ErkekKardes">
+                                            <option selected="selected">Non</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                            <option>13</option>
+                                            <option>14</option>
+                                            <option>15</option>
+                                            <option>16</option>
+                                            <option>17</option>
+                                            <option>18</option>
+                                            <option>19</option>
+                                            <option>20</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" width="200px">Soeures:</td>
+                                    <td align="left" width="50px">
+                                        <select id="KizKardes">
+                                            <option selected="selected">Non</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                            <option>13</option>
+                                            <option>14</option>
+                                            <option>15</option>
+                                            <option>16</option>
+                                            <option>17</option>
+                                            <option>18</option>
+                                            <option>19</option>
+                                            <option>20</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" width="200px">Epoux:</td>
+                                    <td align="left" width="50px">
+                                        <select id="Koca">
+                                            <option selected="selected">Non</option>
+                                            <option>Yes</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <!--tr>
+                                  <td colspan="2" align="center"><input type="button" value="Pay Hesapla" onclick="PayHesapla()" /></td>
+                                </tr-->
+                                <tr>
+                                    <td colspan="2" align="center"><a href="#pay"><img src="../images/PayHesapla1_en.png" alt="" onclick="PayHesapla()" onmouseover="this.src='../images/PayHesapla2_en.png'" onmouseout="this.src='../images/PayHesapla1_en.png'" style="border:0" /></a></td>
+                                </tr>
+                            </table>
+
+                            <br />
+                            <a id="pay"></a>
+                            <table class="imagetable" width="500">
+                                <caption>La division de l'heritage</caption>
+                                <tr>
+                                    <td align="center" width="200px">la part du fils </td>
+                                    <td align="center" width="200px">la part du fille</td>
+                                    <td align="center" width="200px">la part du mère</td>
+                                    <td align="center" width="200px">la part du père </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" width="200px"><label id="ECp" style="font-size:medium; color:Black;">0</label></td>
+                                    <td align="center" width="200px"><label id="KCp" style="font-size:medium; color:Black;">0</label></td>
+                                    <td align="center" width="200px"><label id="Ap" style="font-size:medium; color:Black;">0</label></td>
+                                    <td align="center" width="200px"><label id="Bp" style="font-size:medium; color:Black;">0</label></td>
+                                </tr>
+                                <tr>
+                                    <td align="center" width="200px">la part des frères</td>
+                                    <td align="center" width="200px">la part des soeures </td>
+                                    <td align="center" width="200px">la part de l'epoux</td>
+                                    <td align="center" width="200px">le reste </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" width="200px"><label id="EKp" style="font-size:medium; color:Black;">0</label></td>
+                                    <td align="center" width="200px"><label id="KKp" style="font-size:medium; color:Black;">0</label></td>
+                                    <td align="center" width="200px"><label id="Kp" style="font-size:medium; color:Black;">0</label></td>
+                                    <td align="center" width="200px"><label id="Xp" style="font-size:medium; color:Black;">0</label></td>
+                                </tr>
+                            </table>
+
+                            <p></p>
+
+
+                            <p></p>
+                        </center>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </center>
+    </form>
+
+
+</body>
+</html>

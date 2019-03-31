@@ -4,40 +4,53 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Create</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/css/login.css" rel="stylesheet" type="text/css" />
+    <script src="~/js/site.js"></script>
+</head>
+<body style="background-color:cadetblue;">
+    
+    <div class="row">
+        <div class="wrapper fadeInDown">
+            <div id="formContent">
+                <h3>Ajouter Une Source</h3>
+                <div class="row">
 
-<h4>SOURCE</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="DESIGNATION" class="control-label"></label>
-                <input asp-for="DESIGNATION" class="form-control" />
-                <span asp-validation-for="DESIGNATION" class="text-danger"></span>
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="DESIGNATION" class="control-label"></label>
+                            <input asp-for="DESIGNATION" class="form-control" />
+                            <span asp-validation-for="DESIGNATION" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="HIERARCHIEID" class="control-label"></label>
+                            <input asp-for="HIERARCHIEID" class="form-control" />
+                            <span asp-validation-for="HIERARCHIEID" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="COMMENTAIRE" class="control-label"></label>
+                            <input asp-for="COMMENTAIRE" class="form-control" />
+                            <span asp-validation-for="COMMENTAIRE" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Ajouter" class="btn btn-default" />
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="HIERARCHIEID" class="control-label"></label>
-                <input asp-for="HIERARCHIEID" class="form-control" />
-                <span asp-validation-for="HIERARCHIEID" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="COMMENTAIRE" class="control-label"></label>
-                <input asp-for="COMMENTAIRE" class="form-control" />
-                <span asp-validation-for="COMMENTAIRE" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </form>
-    </div>
-</div>
+        </div>
+    
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    </body>
+</html>

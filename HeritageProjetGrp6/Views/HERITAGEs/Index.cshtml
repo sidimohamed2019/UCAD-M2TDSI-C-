@@ -3,12 +3,18 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h2>Index</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<body  style="background-color:cadetblue;">
+<div class="jumbotron">
+    <h2 style="text-align: center;" class="display-4">Créer Une Héritage et Faite le partage </h2>
+    
+    <p class="lead">
+        <a asp-action="Create" style="margin-left: 50px;" class="btn btn-primary btn-lg">Créer Un nouveau Cas</a>
+        <a asp-area="" asp-controller="HERITIERs" class="btn btn-primary btn-lg" asp-action="Create">Ajouter un Héritier</a>
+        <a asp-area="" asp-controller="BIENs" class="btn btn-primary btn-lg" asp-action="Create">Ajouter les Biens</a>
+        <a asp-controller="ECOLEs" class="btn btn-primary btn-lg" asp-action="Create" class="btn btn-primary btn-lg">Ajouter une Ecole</a>
+        <a asp-controller="Calcul" class="btn btn-primary btn-lg" asp-action="Calcul" class="btn btn-primary btn-lg">Calculer D'Héritage</a>
+    </p>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -34,32 +40,34 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DESCRIPTION)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DATE_DECES)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DATE_HERITAGE)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ECOLEID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MONTANT)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HERITIER.NOMENCLATUREID)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.HERITAGEID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.HERITAGEID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.HERITAGEID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DESCRIPTION)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DATE_DECES)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DATE_HERITAGE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ECOLEID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MONTANT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HERITIER.NOMENCLATUREID)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.HERITAGEID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.HERITAGEID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.HERITAGEID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+    </body>

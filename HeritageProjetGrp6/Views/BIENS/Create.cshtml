@@ -4,44 +4,53 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Create</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/css/login.css" rel="stylesheet" type="text/css" />
+    <script src="~/js/site.js"></script>
+</head>
+<body style="background-color:cadetblue;">
+    
+    <div class="row">
+        <div class="wrapper fadeInDown">
+            <div id="formContent">
+                <h3>Ajouter Un Bien</h3>
 
-<h4>BIENS</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="HERITAGEID" class="control-label"></label>
-                <select asp-for="HERITAGEID" class ="form-control" asp-items="ViewBag.HERITAGEID"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="DESCRIPTION" class="control-label"></label>
-                <input asp-for="DESCRIPTION" class="form-control" />
-                <span asp-validation-for="DESCRIPTION" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EVALUATEUR" class="control-label"></label>
-                <input asp-for="EVALUATEUR" class="form-control" />
-                <span asp-validation-for="EVALUATEUR" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AFFECTATION" class="control-label"></label>
-                <input asp-for="AFFECTATION" class="form-control" />
-                <span asp-validation-for="AFFECTATION" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </form>
-    </div>
-</div>
+                <div class="row">
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        
+                        <div class="form-group">
+                            <label asp-for="DESCRIPTION" class="control-label"></label>
+                            <input asp-for="DESCRIPTION" class="form-control" />
+                            <span asp-validation-for="DESCRIPTION" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EVALUATEUR" class="control-label"></label>
+                            <input asp-for="EVALUATEUR" class="form-control" />
+                            <span asp-validation-for="EVALUATEUR" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AFFECTATION" class="control-label"></label>
+                            <input asp-for="AFFECTATION" class="form-control" />
+                            <span asp-validation-for="AFFECTATION" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Ajouter" class="btn btn-default" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div>
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+            @section Scripts {
+                @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+            }
+</body>
+</html>
